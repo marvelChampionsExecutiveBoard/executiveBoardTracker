@@ -8,12 +8,12 @@
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background:#FFFFC5; }
     nav { background:#000080; color:#fff; padding:12px 20px; font-size:18px; }
     main { padding: 20px; display: flex; flex-direction: column; gap: 20px; }
- 
+
     .tables-row { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; }
     table { border-collapse: collapse; width: max-content; background: #ffffff; box-shadow: 0 4px 8px rgba(0,0,0,0.08); table-layout: fixed; }
     caption { font-weight: bold; padding: 6px 8px; background: #dce9f5; color: #0b3c5d; text-align: left; }
     th { background: #1f6aa5; color: #ffffff; font-weight: bold; }
-    th, td { border: 1px solid #ccc; padding: 2px 4px; text-align: left; white-space: normal; word-break: break-word; width:110; font-size: 12px; }
+    th, td { border: 1px solid #ccc; padding: 2px 4px; text-align: left; white-space: normal; word-break: break-word; font-size: 12px; }
     .center { text-align:center; }
 
     /* Column colors for the 3 info tables */
@@ -49,10 +49,20 @@
 	#investigation-tracker td:nth-child(2) {
   		width: 30px;
 	}
+	
+	#co-tbl th:nth-child(1),
+	#co-tbl td:nth-child(1) {
+  		width: 110px;
+	}
 
-	#CMO-TBL th:nth-child(2),
-	#CMO-TBL td:nth-child(2) { 
+	#co-tbl th:nth-child(2),
+	#co-tbl td:nth-child(2) { 
 		width: 60px;
+	}
+	
+	#co-tbl th:nth-child(3),
+	#co-tbl td:nth-child(3) {
+  		width: 110px;
 	}
 
   </style>
@@ -116,9 +126,9 @@
 <div class="tables-row">
 
 <!-- Chief Medical Officer -->
-<table id="CMO-TBL">
+<table id="co-tbl">
   <caption>Chief Medical Officer</caption>
-  <tr><th>Means</th><th id="test">Motive</th><th>Opportunity</th></tr>
+  <tr><th>Means</th><th>Motive</th><th>Opportunity</th></tr>
   <tr><td>Medical Records</td><td>Money</td><td>Security Clearance</td></tr>
   <tr><td>Medical Records</td><td>Money</td><td>Travel</td></tr>
   <tr><td>Medical Records</td><td>Blackmail</td><td>Security Clearance</td></tr>
@@ -131,7 +141,7 @@
 </table>
 
 <!-- Chief Surveillance Officer -->
-<table>
+<table id="co-tbl">
   <caption>Chief Surveillance Officer</caption>
   <tr><th>Means</th><th>Motive</th><th>Opportunity</th></tr>
   <tr><td>Medical Records</td><td>Blackmail</td><td>Travel</td></tr>
@@ -146,7 +156,7 @@
 </table>
 
 <!-- Chief Tactical Officer -->
-<table>
+<table id="co-tbl">
   <caption>Chief Tactical Officer</caption>
   <tr><th>Means</th><th>Motive</th><th>Opportunity</th></tr>
   <tr><td>Medical Records</td><td>Money</td><td>Authority</td></tr>
@@ -184,7 +194,7 @@ function updateTables() {
       const cells = Array.from(row.children).map(td => td.textContent.trim());
       row.style.display = checkedValues.some(val => cells.includes(val)) ? 'none' : '';
     });
-  });
+  }); 
 
   // Save current state to localStorage
   checkboxes.forEach(cb => localStorage.setItem(cb.id, cb.checked));
